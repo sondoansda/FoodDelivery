@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-       foreach ($this->serviceBindings as $interface => $implementation) {
+        foreach ($this->serviceBindings as $interface => $implementation) {
             $this->app->bind($interface, $implementation);
         }
         // foreach($this->serviceBindings as $key => $val){

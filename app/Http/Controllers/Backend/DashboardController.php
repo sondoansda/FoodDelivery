@@ -3,18 +3,22 @@
 namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 
+               
 class DashboardController extends Controller
 {
-   public function __construct(){ 
-   }
-   public function index(){
-      $config = $this->config();
-      $template = 'dashboard.home.index';
-      return view('dashboard.layout',compact('template','config'));
-   }
- private function config(){
-   return [
-      'js' => [
+    public function __construct()
+    { 
+    }
+    public function index()
+    {
+        $config = $this->config();
+        $template = 'dashboard.home.index';
+        return view('dashboard.layout', compact('template', 'config'));
+    }
+    private function config()
+    {
+        return [
+         'js' => [
          'js/plugins/flot/jquery.flot.js',
         'js/plugins/flot/jquery.flot.tooltip.min.js',
         'js/plugins/flot/jquery.flot.spline.js',
@@ -32,7 +36,7 @@ class DashboardController extends Controller
         'js/plugins/easypiechart/jquery.easypiechart.js',
         'js/plugins/sparkline/jquery.sparkline.min.js',
         'js/demo/sparkline-demo.js'
-      ]
-   ];
- }
+         ]
+        ];
+    }
 }

@@ -11,27 +11,31 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-   protected $userService;
-   public function __construct(USI $userService){
-      $this->userService = $userService;
-   }
-   public function index(){
-      $users = $this->userService->paginate();
+    protected $userService;
+    public function __construct(USI $userService)
+    {
+        $this->userService = $userService;
+    }
+    public function index()
+    {
+        $users = $this->userService->paginate();
       
-      $config = $this->config();
-    $template = 'user.index';
-     return view('dashboard.layout',compact('template','config','users'));
+        $config = $this->config();
+        $template = 'user.index';
+        return view('dashboard.layout', compact('template', 'config', 'users'));
 
-   }
-   public function edit(Request $request, $id)
+    }
+    public function edit(Request $request, $id)
     {
    
-        $request->validate([
+        $request->validate(
+            [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
             'phone' => 'required|string',
             'address' => 'required|string',
-        ]);
+            ]
+        );
         // Lấy người dùng từ ID
         $user = User::find($id);
 
@@ -48,15 +52,16 @@ class UserController extends Controller
         // Trả về thông báo và chuyển hướng
         return redirect()->route('users.index')->with('success', 'Cập nhật người dùng thành công!');
     }
-   private function config(){
-      return [
+    private function config()
+    {
+        return [
          'js' => [
             'js/plugins/switchery/switchery.js'
          ],
          'css'=>[
             'css/plugins/switchery/switchery.css'
          ]
-      ];
+        ];
     }
 
 }
